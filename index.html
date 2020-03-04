@@ -35,6 +35,7 @@
 					<th scope="col">Serial</th>
 					<th scope="col">Name</th>
 					<th scope="col">Price</th>
+					<th scope="col">Action</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -43,12 +44,14 @@
 					<th scope="row">{{index+1}}</th>
 					<td>{{single.name}}</td>
 					<td>{{single.amount}}</td>
+					<td><button @click="removeItem(index)" class="btn btn-danger">X</button></td>
 				</tr>
 
 				<tr>
 					<th scope="row"></th>
 					<td>Total</td>
 					<td>{{total}}</td>
+					<td></td>
 				</tr>
 
 				</tbody>
@@ -80,6 +83,11 @@ const app = new Vue({
 				total += single.amount
 			})
 			return total
+		}
+	},
+	methods:{
+		removeItem(id){
+			this.payments.splice(id, 1)
 		}
 	}
 })
