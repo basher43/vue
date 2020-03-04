@@ -28,7 +28,7 @@
 <body>
 <div id="app" class="container">
 	<div class="row">
-		<div class="col-md-6 offset-md-3">
+		<div class="col-md-6">
 			<table class="table">
 				<thead class="thead-dark">
 				<tr>
@@ -57,6 +57,22 @@
 				</tbody>
 			</table>
 		</div>
+
+		<div class="col-md-6 mt-5" >
+			<form>
+				<div class="row">
+					<div class="col">
+						<input type="text" v-model="name" class="form-control" placeholder="Name">
+					</div>
+					<div class="col">
+						<input type="number" v-model="amount" min="amount" class="form-control" placeholder="100">
+					</div>
+					<div class="col">
+						<button type="submit" @click.prevent="addItem" class="form-control btn btn-primary" >Add </button>
+					</div>
+				</div>
+			</form>
+		</div>
 	</div>
 
 </div>
@@ -74,13 +90,16 @@ const app = new Vue({
 			{name:"Gaz", amount:900, paid: true},
 			{name:"Water", amount:300, paid: true},
 			{name:"Net", amount:800, paid: true},
-		]
+		],
+		name:"",
+		amount:0,
+		paid:"false"
 	},
 	computed:{
 		total(){
 			var total = 0
 			this.payments.forEach(single=>{
-				total += single.amount
+				total += parseFloat(single.amount)
 			})
 			return total
 		}
@@ -88,6 +107,11 @@ const app = new Vue({
 	methods:{
 		removeItem(id){
 			this.payments.splice(id, 1)
+		},
+		addItem(){
+			this.payments.push({name:this.name, amount:this.amount, paid:this.paid})
+			this.name = "",
+			this.amount=0
 		}
 	}
 })
