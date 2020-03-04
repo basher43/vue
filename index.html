@@ -53,6 +53,12 @@
 					<td>{{total}}</td>
 					<td></td>
 				</tr>
+				<tr>
+					<th scope="row"></th>
+					<td>Paid Total</td>
+					<td>{{totalPaid}}</td>
+					<td></td>
+				</tr>
 
 				</tbody>
 			</table>
@@ -86,7 +92,7 @@ const app = new Vue({
 	data:{
 		payments:[
 			{name:"House Rent", amount:20000, paid: true},
-			{name:"Electricity", amount:2000, paid: true},
+			{name:"Electricity", amount:2000, paid: false},
 			{name:"Gaz", amount:900, paid: true},
 			{name:"Water", amount:300, paid: true},
 			{name:"Net", amount:800, paid: true},
@@ -97,12 +103,23 @@ const app = new Vue({
 	},
 	computed:{
 		total(){
-			var total = 0
+			let total = 0
 			this.payments.forEach(single=>{
 				total += parseFloat(single.amount)
 			})
 			return total
-		}
+		},
+		totalPaid(){
+			let total = 0
+			let a =this.payments.filter(single=>{
+				return !single.paid == false
+			})
+			a.forEach(s=>{
+				total += s.amount
+			})
+			return total
+		},
+
 	},
 	methods:{
 		removeItem(id){
