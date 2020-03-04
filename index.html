@@ -59,6 +59,12 @@
 					<td>{{totalPaid}}</td>
 					<td></td>
 				</tr>
+				<tr>
+					<th scope="row"></th>
+					<td>Unpaid Total</td>
+					<td>{{totalUnPaid}}</td>
+					<td></td>
+				</tr>
 
 				</tbody>
 			</table>
@@ -99,7 +105,7 @@ const app = new Vue({
 		],
 		name:"",
 		amount:0,
-		paid:"false"
+		paid:false
 	},
 	computed:{
 		total(){
@@ -115,11 +121,20 @@ const app = new Vue({
 				return !single.paid == false
 			})
 			a.forEach(s=>{
-				total += s.amount
+				total += parseFloat(s.amount)
 			})
 			return total
 		},
-
+		totalUnPaid(){
+			let total = 0
+			let modified = this.payments.filter(single=>{
+				return single.paid == false
+			})
+			modified.forEach(s=>{
+				total += parseFloat(s.amount)
+			})
+			return total
+		}
 	},
 	methods:{
 		removeItem(id){
