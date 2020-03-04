@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<style>
+		#ttt{
+			list-style: none;
+
+		}
+		#ttt li{
+			display: inline;
+
+		}
+		#ttt li a{
+			padding: 10px;
+			text-decoration: none;
+			background: #0c5460;
+			color: #ffffff;
+		}
+		.active{
+			background: #0c5460 !important;
+			color: red !important;
+			padding: 10px !important;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<ul id="ttt">
+		<li v-for="(item, i) in items" :key="i">
+			<a href="" :class="{'active': className=='a'}">{{item.name}}</a>
+
+		</li>
+	</ul>
+
+	<ul>
+		<li v-for="(item, i) in items" :key="i">
+
+			{{i+1}} - {{item.name}} -- {{item.price}} <button @click="removeItem(i)">x</button>
+		</li>
+		<li>total: {{total}}</li>
+	</ul>
+	<form @submit.prevent="addItem">
+		<input type="text" v-model="name">
+		<input type="text" min="0" v-model="price">
+		<button type="submit">Add</button>
+	</form>
+</div>
+
+
+
+
+<script>
+const app = new Vue({
+	el:"#app",
+	data: {
+		items: [
+			{name:"Facebook", price:50},
+			{name:"Twitter", price:60},
+			{name:"Youtube", price:70},
+		],
+		name:"",
+		price:0,
+		className: "a"
+	},
+	computed:{
+		total(){
+			var total = 0;
+			this.items.forEach(item=>{
+				total += parseFloat(item.price)
+			})
+			return total;
+		}
+	},
+	methods:{
+		addItem(){
+			this.items.push({name: this.name, price:this.price})
+			this.name=''
+			this.price=0
+		},
+		removeItem(id){
+			this.items.splice(id, 1)
+		}
+	}
+})
+
+</script>
+
+</body>
+</html>
+
