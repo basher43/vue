@@ -27,35 +27,35 @@
 </head>
 <body>
 <div id="app" class="container">
-<div class="panel">
-<!--component sowing part start start-->
-	<button class="btn btn-success" @click="showModal=true">open modal</button>
-
-	<panel title="hello world"  v-if="showModal" @cancel="showModal=false">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur autem blanditiis distinctio dolore et ex natus quas similique velit?</p>
-	</panel>
-
-<!--component showing part end-->
-<!--component er ei part e thakbe ja show korabo, ekhane ja thakbe shob dynamically show hobe-->
+<tabs>
+	<template slot="one">
+		<h1>One</h1>
+	</template>
+	<template slot="two">
+		<h1>Two</h1>
+	</template>
+	<template slot="three">
+		<h1>Three</h1>
+	</template>
+</tabs>
 </div>
-</div>
-
-
-
 
 <script>
-<!--component making mechanism start from here -->
-	Vue.component('panel', {
-		template: `<div>
-<button class="btn btn-danger" @click="$emit('cancel')">x</button>
-		<h1>{{title}}</h1>
-		<p><slot></slot></p>
-
-</div>>`,
-		props:['title'],
-
+	Vue.component('tabs', {
+		template: `
+<div>
+        <div>
+            <slot name="one"></slot>
+        </div>
+        <div>
+            <slot name="two"></slot>
+        </div>
+        <div>
+            <slot name="three"></slot>
+        </div>
+</div>
+    `
 	})
-<!--component making mechanism end here -->
 const app = new Vue({
 	el:"#app",
 	data:{
