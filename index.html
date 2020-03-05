@@ -5,7 +5,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<style>
-		#ttt{
+		#ttt, ul{
 			list-style: none;
 		}
 		#ttt li{
@@ -27,40 +27,31 @@
 </head>
 <body>
 <div id="app" class="container">
-<tabs>
-	<template slot="one">
-		<h1>One</h1>
-	</template>
-	<template slot="two">
-		<h1>Two</h1>
-	</template>
-	<template slot="three">
-		<h1>Three</h1>
-	</template>
-</tabs>
+	<tabs>
+		<tab name="Tab One" selected="true">
+			<p> Tab 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
+				officiis sed?</p>
+		</tab>
+		<tab name="Tab Two">
+			<p>Tab 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
+				officiis sed?</p>
+		</tab>
+		<tab name="Tab Three">
+			<p> Tab 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
+				officiis sed?</p>
+		</tab>
+		<tab name="Tab Four">
+			<p>Tab 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
+				officiis sed?</p>
+		</tab>
+	</tabs>
 </div>
 
+<script src="components.js"></script>
 <script>
-	Vue.component('tabs', {
-		template: `
-<div>
-        <div>
-            <slot name="one"></slot>
-        </div>
-        <div>
-            <slot name="two"></slot>
-        </div>
-        <div>
-            <slot name="three"></slot>
-        </div>
-</div>
-    `
-	})
+
 const app = new Vue({
 	el:"#app",
-	data:{
-		showModal:false
-	}
 
 })
 </script>
