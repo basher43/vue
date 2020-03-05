@@ -27,125 +27,38 @@
 </head>
 <body>
 <div id="app" class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<table class="table">
-				<thead class="thead-dark">
-				<tr>
-					<th scope="col">Serial</th>
-					<th scope="col">Name</th>
-					<th scope="col">Price</th>
-					<th scope="col">Action</th>
-				</tr>
-				</thead>
-				<tbody>
-
-				<tr v-for="(single, index) in payments">
-					<th scope="row">{{index+1}}</th>
-					<td>{{single.name}}</td>
-					<td>{{single.amount}}</td>
-					<td><button @click="removeItem(index)" class="btn btn-danger">X</button></td>
-				</tr>
-
-				<tr>
-					<th scope="row"></th>
-					<td>Total</td>
-					<td>{{total}}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row"></th>
-					<td>Paid Total</td>
-					<td>{{totalPaid}}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th scope="row"></th>
-					<td>Unpaid Total</td>
-					<td>{{totalUnPaid}}</td>
-					<td></td>
-				</tr>
-
-				</tbody>
-			</table>
-		</div>
-
-		<div class="col-md-6 mt-5" >
-			<form>
-				<div class="row">
-					<div class="col">
-						<input type="text" v-model="name" class="form-control" placeholder="Name">
-					</div>
-					<div class="col">
-						<input type="number" v-model="amount" min="amount" class="form-control" placeholder="100">
-					</div>
-					<div class="col">
-						<button type="submit" @click.prevent="addItem" class="form-control btn btn-primary" >Add </button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-
+<div class="panel">
+<!--component sowing part start start-->
+	<panel title="hello world">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur autem blanditiis distinctio dolore et ex natus quas similique velit?</p>
+	</panel>
+<!--component showing part end-->
+<!--component er ei part e thakbe ja show korabo, ekhane ja thakbe shob dynamically show hobe-->
+</div>
 </div>
 
 
 
 
 <script>
+<!--component making mechanism start from here -->
+	Vue.component('panel', {
+		template: `<div v-if="show" >
+<button class="btn btn-danger" @click="show=false">x</button>
+		<h1>{{title}}</h1>
+		<p><slot></slot></p>
+
+</div>>`,
+		props:['title'],
+		data:function(){
+			return {
+				show:true
+			}
+		}
+	})
+<!--component making mechanism end here -->
 const app = new Vue({
-	el:"#app",
-	data:{
-		payments:[
-			{name:"House Rent", amount:20000, paid: true},
-			{name:"Electricity", amount:2000, paid: false},
-			{name:"Gaz", amount:900, paid: true},
-			{name:"Water", amount:300, paid: true},
-			{name:"Net", amount:800, paid: true},
-		],
-		name:"",
-		amount:0,
-		paid:false
-	},
-	computed:{
-		total(){
-			let total = 0
-			this.payments.forEach(single=>{
-				total += parseFloat(single.amount)
-			})
-			return total
-		},
-		totalPaid(){
-			let total = 0
-			let a =this.payments.filter(single=>{
-				return !single.paid == false
-			})
-			a.forEach(s=>{
-				total += parseFloat(s.amount)
-			})
-			return total
-		},
-		totalUnPaid(){
-			let total = 0
-			let modified = this.payments.filter(single=>{
-				return single.paid == false
-			})
-			modified.forEach(s=>{
-				total += parseFloat(s.amount)
-			})
-			return total
-		}
-	},
-	methods:{
-		removeItem(id){
-			this.payments.splice(id, 1)
-		},
-		addItem(){
-			this.payments.push({name:this.name, amount:this.amount, paid:this.paid})
-			this.name = "",
-			this.amount=0
-		}
-	}
+	el:"#app"
 })
 </script>
 
