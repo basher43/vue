@@ -3,16 +3,17 @@
 <head>
 <title>Page Title</title>
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="vue-router.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<style>
 		#ttt, ul{
 			list-style: none;
 		}
-		#ttt li{
+		#ttt li, ul li{
 			display: inline;
 
 		}
-		#ttt li a{
+		#ttt li a, ul li a{
 			padding: 10px;
 			text-decoration: none;
 			background: #0c5460;
@@ -36,29 +37,64 @@
 </head>
 <body>
 <div id="app" class="container">
-<button class="btn btn-info" @click="show=!show">Toggle</button> <!--toggle button-->
-	<transition name="fade">
-		<div v-if="show" class="card" style="width: 18rem;">
-			<div class="card-body">
-				<h5 class="card-title">Card title</h5>
-				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				<a href="#" class="btn btn-primary">Go somewhere</a>
-			</div>
-		</div>
-	</transition>
-</div>
+	<div>
+		<ul>
+			<li> <router-link to="/"> Home</router-link></li>
+			<li><router-link to="/about">About</router-link></li>
+			<li><router-link to="/contact">Contact</router-link></li>
+			<li><router-link to="/gallery">Gallery</router-link></li>
+		</ul>
 
+	</div>
+	<div>
+		<router-view></router-view>
+	</div>
+</div>
 
 
 <script>
 
-const app = new Vue({
-	el:"#app",
-	data:{
-		show:false
-	}
 
-})
+
+	const home =	{template: `<div>
+		<h2>Home title here</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta eveniet exercitationem repellat. Accusamus animi aspernatur consequuntur debitis eius enim inventore molestias natus, nostrum perferendis perspiciatis quaerat quas quo repellendus similique temporibus unde vel velit. Adipisci amet at deleniti dolore eaque et, explicabo magnam maxime, non obcaecati omnis quia, quo tempora.</p>
+	</div>`}
+	const about =	{template: `<div>
+		<h2>About Title here</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta eveniet exercitationem repellat. Accusamus animi aspernatur consequuntur debitis eius enim inventore molestias natus, nostrum perferendis perspiciatis quaerat quas quo repellendus similique temporibus unde vel velit. Adipisci amet at deleniti dolore eaque et, explicabo magnam maxime, non obcaecati omnis quia, quo tempora.</p>
+	</div>`}
+	const contact =	{template: `<div>
+		<h2>Contact title here</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta eveniet exercitationem repellat. Accusamus animi aspernatur consequuntur debitis eius enim inventore molestias natus, nostrum perferendis perspiciatis quaerat quas quo repellendus similique temporibus unde vel velit. Adipisci amet at deleniti dolore eaque et, explicabo magnam maxime, non obcaecati omnis quia, quo tempora.</p>
+	</div>`}
+	const gallery =	{template: `<div>
+		<h2>Gallery title here</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta eveniet exercitationem repellat. Accusamus animi aspernatur consequuntur debitis eius enim inventore molestias natus, nostrum perferendis perspiciatis quaerat quas quo repellendus similique temporibus unde vel velit. Adipisci amet at deleniti dolore eaque et, explicabo magnam maxime, non obcaecati omnis quia, quo tempora.</p>
+	</div>`}
+
+	var routes = [
+		{path:'/', component: home},
+		{path:'/about', component: about},
+		{path:'/contact', component: contact},
+		{path:'/gallery', component: gallery}
+	]
+
+	const router = new VueRouter({
+		routes,
+	})
+
+	const app = new Vue({
+		router
+	}).$mount('#app')
+
+// const app = new Vue({
+// 	el:"#app",
+// 	data:{
+// 		show:false
+// 	}
+//
+// })
 </script>
 
 </body>
