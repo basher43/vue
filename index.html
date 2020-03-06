@@ -23,35 +23,40 @@
 			color: red !important;
 			padding: 10px !important;
 		}
+		.fade-enter-active, .fade-leave-active{
+			transition: all .5s;
+		}
+		.fade-leave-to{
+			margin-top: 30%;
+		}
+		.fade-enter{
+			margin-top: -500px;
+		}
 	</style>
 </head>
 <body>
 <div id="app" class="container">
-	<tabs>
-		<tab name="Tab One" selected="true">
-			<p> Tab 1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
-				officiis sed?</p>
-		</tab>
-		<tab name="Tab Two">
-			<p>Tab 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
-				officiis sed?</p>
-		</tab>
-		<tab name="Tab Three">
-			<p> Tab 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
-				officiis sed?</p>
-		</tab>
-		<tab name="Tab Four">
-			<p>Tab 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa dolor, fuga minima necessitatibus
-				officiis sed?</p>
-		</tab>
-	</tabs>
+<button class="btn btn-info" @click="show=!show">Toggle</button> <!--toggle button-->
+	<transition name="fade">
+		<div v-if="show" class="card" style="width: 18rem;">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+	</transition>
 </div>
 
-<script src="components.js"></script>
+
+
 <script>
 
 const app = new Vue({
 	el:"#app",
+	data:{
+		show:false
+	}
 
 })
 </script>

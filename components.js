@@ -22,8 +22,8 @@ Vue.component ('tabs', {
         this.tabs = this.$children
     },
     methods:{
-        activeTab(tabName){
-            Event.$emit("tabChange", tabName)
+        activeTab(s){
+            Event.$emit("tabChange", s)
         }
     }
 
@@ -37,7 +37,8 @@ Vue.component('tab', {
     `,
     data(){
         return {
-            selectedNow:this.selected
+            selectedNow:this.selected,
+            abc:"Bangladesh"
         }
     },
     created(){
